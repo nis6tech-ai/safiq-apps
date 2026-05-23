@@ -60,7 +60,7 @@ function Home() {
               <h2 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">Available downloads</h2>
             </div>
             <p className="max-w-md text-sm leading-6 text-slate-500">
-              Browse apps, check ratings, preview screenshots, and download APK files.
+              Browse apps, check ratings, preview screenshots and screen records, and download APK files.
             </p>
           </div>
 
@@ -90,7 +90,7 @@ function Home() {
 
                         <span className="inline-flex w-fit items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-sm font-black text-emerald-700">
                           <FaAndroid />
-                          APK
+                          {app.platform || 'Android'}
                         </span>
                       </div>
 

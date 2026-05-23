@@ -5,6 +5,7 @@ import 'swiper/css'
 import {
   FaArrowLeft,
   FaDownload,
+  FaPlay,
   FaRegImage,
   FaShareNodes,
   FaStar
@@ -60,6 +61,90 @@ function ScreenshotFallback({ index }) {
   )
 }
 
+function VideoFallback({ index }) {
+  return (
+    <div className="grid aspect-[9/16] w-full place-items-center bg-slate-100 px-6 text-center">
+      <div>
+        <FaPlay className="mx-auto mb-3 text-2xl text-slate-400" />
+        <p className="text-sm font-bold text-slate-500">Screen record {index + 1}</p>
+      </div>
+    </div>
+  )
+}
+
+function getMediaSrc(item) {
+  if (typeof item === 'string') {
+    return item
+  }
+
+  return item.src
+}
+
+function getMediaAlt(item, appName, index) {
+  if (typeof item === 'string') {
+    return `${appName} media ${index + 1}`
+  }
+
+  return item.alt || `${appName} media ${index + 1}`
+}
+
+function getMediaPoster(item) {
+  if (typeof item === 'string') {
+    return undefined
+  }
+
+  return item.poster
+}
+
+function isVideoItem(item) {
+  if (typeof item !== 'string' && item.type === 'video') {
+    return true
+  }
+
+  return /\.(mp4|webm|ogg|mov|m4v)$/i.test(getMediaSrc(item))
+}
+
+function MediaPreview({ item, appName, index }) {
+  const src = getMediaSrc(item)
+  const alt = getMediaAlt(item, appName, index)
+  const poster = getMediaPoster(item)
+  const [hasVideoError, setHasVideoError] = useState(false)
+
+  if (isVideoItem(item)) {
+    if (hasVideoError) {
+      return <VideoFallback index={index} />
+    }
+
+    return (
+      <div className="relative">
+        <video
+          src={src}
+          poster={poster}
+          controls
+          muted
+          playsInline
+          preload="metadata"
+          onError={() => setHasVideoError(true)}
+          className="aspect-[9/16] w-full bg-black object-cover"
+        />
+        <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-black/70 px-3 py-1 text-xs font-black text-white">
+          <FaPlay />
+          Screen record
+        </span>
+      </div>
+    )
+  }
+
+  return (
+    <SafeImage
+      src={src}
+      alt={alt}
+      className="aspect-[9/16] w-full object-cover"
+      fallback={<ScreenshotFallback index={index} />}
+    />
+  )
+}
+
 function AppDetails() {
   const { id } = useParams()
   const app = apps.find((item) => item.id === parseInt(id, 10))
@@ -104,6 +189,10 @@ function AppDetails() {
       console.error('Failed to record download:', error)
     })
   }
+
+  const downloadUrl = app.downloadUrl || app.apk
+  const downloadLabel = app.downloadLabel || 'Download APK'
+  const isExternalDownload = /^https?:\/\//i.test(downloadUrl)
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-950">
@@ -168,13 +257,15 @@ function AppDetails() {
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <a
-                  href={app.apk}
-                  download
+                  href={downloadUrl}
+                  download={!isExternalDownload}
+                  target={isExternalDownload ? '_blank' : undefined}
+                  rel={isExternalDownload ? 'noreferrer' : undefined}
                   onClick={handleDownload}
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-5 py-3 text-sm font-black text-white shadow-sm transition hover:bg-emerald-700"
                 >
                   <FaDownload />
-                  Download APK
+                  {downloadLabel}
                 </a>
                 <button
                   onClick={shareApp}
@@ -191,8 +282,8 @@ function AppDetails() {
         <section className="py-9">
           <div className="mb-4 flex items-end justify-between gap-4">
             <div>
-              <h2 className="text-2xl font-black tracking-tight">Screenshots</h2>
-              <p className="mt-1 text-sm text-slate-500">Swipe through app screens.</p>
+              <h2 className="text-2xl font-black tracking-tight">Screenshots & screen records</h2>
+              <p className="mt-1 text-sm text-slate-500">Swipe through screenshots and screen recordings.</p>
             </div>
           </div>
 
@@ -204,20 +295,19 @@ function AppDetails() {
               1024: { slidesPerView: 3.6 }
             }}
           >
-            {app.screenshots.map((image, index) => (
-              <SwiperSlide key={image}>
+            {app.screenshots.map((item, index) => {
+              const src = getMediaSrc(item)
+
+              return (
+              <SwiperSlide key={src}>
                 <div className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white p-2 shadow-sm">
                   <div className="overflow-hidden rounded-[1.25rem] bg-slate-100">
-                    <SafeImage
-                      src={image}
-                      alt={`${app.name} screenshot ${index + 1}`}
-                      className="aspect-[9/16] w-full object-cover"
-                      fallback={<ScreenshotFallback index={index} />}
-                    />
+                    <MediaPreview item={item} appName={app.name} index={index} />
                   </div>
                 </div>
               </SwiperSlide>
-            ))}
+              )
+            })}
           </Swiper>
         </section>
 

@@ -50,7 +50,39 @@ const apps = [
     apk: "/apps/CoinClickerGame/app-debug.apk",
     rating: 4.5,
     downloads: "10K+"
+  },
+  {
+    id: 4,
+    name: "AI Finance Coach iOS App",
+    logo: "/apps/AIFinanceCoach/logo.png",
+    description:
+      "AI-powered financial coaching app to help users make informed investment decisions.",
+    longDescription:
+      "AI Finance Coach is a iOS app for smart wealth management. It features Core Data for local persistence, AI-driven categorization, and interactive data visualizations via Apple Charts. Includes biometric security (Face ID), a natural language chat assistant, and rule-based insights to optimize personal spending and budgeting.",
+    screenshots: [
+      "/apps/AIFinanceCoach/Working.mp4"
+    ],
+    apk: "https://github.com/Safiq03/AI-FInance-App",
+    rating: 4.5,
+    downloads: "10K+"
+  },
+
+  {
+    id: 5,
+    name: "CyberShield iOS App",
+    logo: "/apps/CyberShield/logo.png",
+    description:
+      "Your ultimate security companion for defending against digital threats.",
+    longDescription:
+      "CyberShield is your ultimate security companion. Defend against digital threats with real-time phishing detection, screenshot scam analysis, and password strength checks. Enjoy total privacy with our secure offline architecture. Stay protected!Resources",
+    screenshots: [
+      "/apps/CyberShield/Working.mp4"
+    ],
+    apk: "https://github.com/Safiq03/CyberShield",
+    rating: 4.5,
+    downloads: "10K+"
   }
+  
 ]
 
 
