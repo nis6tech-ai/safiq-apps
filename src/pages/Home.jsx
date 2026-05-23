@@ -42,8 +42,8 @@ function Home() {
               <FaLayerGroup />
             </div>
             <div>
-              <h1 className="text-lg font-black leading-none tracking-tight">Nis6 Tech Apps</h1>
-              <p className="mt-1 text-sm font-medium text-slate-500">Clean Android APK catalog</p>
+              <h1 className="text-lg font-black leading-none tracking-tight">Mohammed Safiq Nishar Apps</h1>
+              <p className="mt-1 text-sm font-medium text-slate-500">Android & iOS Apps</p>
             </div>
           </Link>
 
