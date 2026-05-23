@@ -14,6 +14,7 @@ const apps = [
       "/apps/DarkWebExposureTrackerApp/Result.png",
       "/apps/DarkWebExposureTrackerApp/Settings.png"
     ],
+    platform: "Android",
     apk: "/apps/DarkWebExposureTrackerApp/app-release.apk",
     rating: 4.8,
     downloads: "1K+"
@@ -31,6 +32,7 @@ const apps = [
       "/apps/MFA/1.png",
       "/apps/MFA/2.png"
     ],
+    platform: "Android",
     apk: "/apps/MFA/app-debug.apk",
     rating: 4.7,
     downloads: "500+"
@@ -47,6 +49,7 @@ const apps = [
       "/apps/CoinClickerGame/1.png",
       "/apps/CoinClickerGame/2.png"
     ],
+    platform: "Android",
     apk: "/apps/CoinClickerGame/app-debug.apk",
     rating: 4.5,
     downloads: "10K+"
@@ -62,6 +65,7 @@ const apps = [
     screenshots: [
       "/apps/AIFinanceCoach/Working.mp4"
     ],
+    platform: "iOS",
     apk: "https://github.com/Safiq03/AI-FInance-App",
     rating: 4.5,
     downloads: "10K+"
@@ -78,6 +82,7 @@ const apps = [
     screenshots: [
       "/apps/CyberShield/Working.mp4"
     ],
+    platform: "iOS",
     apk: "https://github.com/Safiq03/CyberShield",
     rating: 4.5,
     downloads: "10K+"

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FaAndroid, FaArrowRight, FaDownload, FaLayerGroup, FaStar } from 'react-icons/fa6'
+import { FaAndroid, FaArrowRight, FaApple, FaDownload, FaLayerGroup, FaStar } from 'react-icons/fa6'
 import apps from '../data/apps'
 import { formatCount, formatRating, useAppStats } from '../hooks/useAppStats'
 
@@ -88,10 +88,17 @@ function Home() {
                           <p className="mt-1 max-w-2xl text-sm leading-6 text-slate-500">{app.description}</p>
                         </div>
 
-                        <span className="inline-flex w-fit items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-sm font-black text-emerald-700">
-                          <FaAndroid />
-                          {app.platform || 'Android'}
-                        </span>
+                        <span
+  className={`inline-flex w-fit items-center gap-2 rounded-full px-3 py-1.5 text-sm font-black
+    ${
+      app.platform === 'iOS'
+        ? 'bg-slate-100 text-slate-800'
+        : 'bg-emerald-50 text-emerald-700'
+    }`}
+>
+  {app.platform === 'iOS' ? <FaApple /> : <FaAndroid />}
+  {app.platform}
+</span>
                       </div>
 
                       <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
