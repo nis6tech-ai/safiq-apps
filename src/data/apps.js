@@ -66,7 +66,7 @@ const apps = [
       "/apps/AIFinanceCoach/Working.mp4"
     ],
     platform: "iOS",
-    apk: "https://github.com/Safiq03/AI-FInance-App",
+    github: "https://github.com/Safiq03/AI-FInance-App",
     rating: 4.5,
     downloads: "10K+"
   },
@@ -83,7 +83,7 @@ const apps = [
       "/apps/CyberShield/Working.mp4"
     ],
     platform: "iOS",
-    apk: "https://github.com/Safiq03/CyberShield",
+    github: "https://github.com/Safiq03/CyberShield",
     rating: 4.5,
     downloads: "10K+"
   }
